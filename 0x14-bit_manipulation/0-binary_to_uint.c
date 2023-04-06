@@ -12,23 +12,17 @@ unsigned int binary_to_uint(const char *b)
 {
 	int i;
 	unsigned int decimal = 0;
-	int len;
 
 	if (!b)
 		return (0);
-	for (len = 0; b[len] != '\0'; len++);
 
-	for (len--, i = 1; len >= 0; len--, i *= 2)
+	for (i = 0; b[i]; i++)
 	{
-		if (b[len] != '0' && b[len] != '1')
-		{
+		if (b[i] < '0' || b[i] > '1')
 			return (0);
-		}
-
-		if (b[len] & 1)
-		{
-			decimal += i;
-		}
+		decimal = 2 * decimal + (b[i] - '0');
 	}
+
 	return (decimal);
 }
+
